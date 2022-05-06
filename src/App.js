@@ -9,8 +9,10 @@ import {
   Typography,
   useScrollTrigger,
 } from '@mui/material'
+
 import store from 'store2'
 
+import firebase from './firebase'
 import SubmitDialog from './SubmitDialog'
 import cards from './cards'
 import FormSubmit from './FormSubmit'
@@ -34,7 +36,10 @@ const App = () => {
     saveSurveyValue(surveyValue)
   }, [surveyValue])
 
-  const submitHandler = () => setOpenSubmitDialog(true)
+  const submitHandler = async () => {
+    await firebase.submitSurvey(surveyValue)
+    setOpenSubmitDialog(true)
+  }
 
   return (
     <React.Fragment>
