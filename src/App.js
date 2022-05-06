@@ -125,9 +125,6 @@ const App = () => {
           open={openSubmitDialog}
           onClose={() => setOpenSubmitDialog(false)}
         />
-        <Card>
-          <pre>{JSON.stringify(surveyValue, null, 2)}</pre>
-        </Card>
       </Container>
     </React.Fragment>
   )
