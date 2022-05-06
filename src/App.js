@@ -378,7 +378,7 @@ const cards = [
 
 const loadSurveyValue = () => {
   try {
-    return JSON.parse(store.get('surveyValue') || '{}')
+    return JSON.parse(store.get('surveyValue') || '{}') ?? {}
   } catch (error) {
     return {}
   }
