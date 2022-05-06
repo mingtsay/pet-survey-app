@@ -376,35 +376,16 @@ const cards = [
   },
 ]
 
-const loadSurveyValue = () => {
-  try {
-    return JSON.parse(store.get('surveyValue') || '{}') ?? {}
-  } catch (error) {
-    return {}
-  }
-}
-
-const saveSurveyValue = value => {
-  try {
-    const valueJson = JSON.stringify(value)
-    store.set('surveyValue', valueJson)
-  } catch (error) {
-    // do nothing
-  }
-}
+const loadSurveyValue = () => JSON.parse(store.get('surveyValue') || '{}') ?? {}
+const saveSurveyValue = value => store.set('surveyValue', JSON.stringify(value))
 
 const App = () => {
   const trigger = useScrollTrigger()
 
-  const [surveyValue, setSurveyValue] = useState(JSON.parse(store.get('surveyValue')))
+  const [surveyValue, setSurveyValue] = useState(loadSurveyValue())
 
-  useEffect(() => {
-    setSurveyValue(loadSurveyValue())
-  }, [])
-
-  useEffect(() => {
-    saveSurveyValue(surveyValue)
-  }, [surveyValue])
+  useEffect(() => { setSurveyValue(loadSurveyValue()) }, [])
+  useEffect(() => { saveSurveyValue(surveyValue) }, [surveyValue])
 
   return (
     <React.Fragment>
