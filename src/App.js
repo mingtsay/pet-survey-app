@@ -14,6 +14,7 @@ import store from 'store2'
 
 import firebase from './firebase'
 import SubmitDialog from './SubmitDialog'
+import SubmitFailureDialog from './SubmitFailureDialog'
 import cards from './cards'
 import FormSubmit from './FormSubmit'
 import FormSingle from './FormSingle'
@@ -28,6 +29,7 @@ const App = () => {
 
   const [surveyValue, setSurveyValue] = useState(loadSurveyValue())
   const [openSubmitDialog, setOpenSubmitDialog] = useState(false)
+  const [openSubmitFailureDialog, setOpenSubmitFailureDialog] = useState(false)
 
   useEffect(() => {
     setSurveyValue(loadSurveyValue())
@@ -37,8 +39,13 @@ const App = () => {
   }, [surveyValue])
 
   const submitHandler = async () => {
-    await firebase.submitSurvey(surveyValue)
-    setOpenSubmitDialog(true)
+    try {
+      await firebase.submitSurvey(surveyValue)
+      setSurveyValue({}) // clear survey
+      setOpenSubmitDialog(true)
+    } catch (error) {
+      setOpenSubmitFailureDialog(true)
+    }
   }
 
   return (
@@ -124,6 +131,10 @@ const App = () => {
         <SubmitDialog
           open={openSubmitDialog}
           onClose={() => setOpenSubmitDialog(false)}
+        />
+        <SubmitFailureDialog
+          open={openSubmitFailureDialog}
+          onClose={() => setOpenSubmitFailureDialog(false)}
         />
       </Container>
     </React.Fragment>
