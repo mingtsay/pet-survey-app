@@ -429,7 +429,7 @@ const App = () => {
       <Toolbar />
       <Container>
         {cards
-          .filter(card => card.visibility?.(surveyValue) ?? true)
+          .filter(card => card?.visibility?.(surveyValue) ?? true)
           .map((card, index) => (
             <Card
               key={`card-${index}`}
