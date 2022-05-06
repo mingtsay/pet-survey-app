@@ -8,6 +8,9 @@ import {
   serverTimestamp,
 } from 'firebase/firestore'
 
+// TODO: FirebaseUI
+// import * as firebaseui from 'firebaseui'
+
 const firebaseConfig = {
   apiKey: 'AIzaSyB7H_S-kyAXYsPq87fxvVzAeqgT5AdCBtM',
   authDomain: 'pet-survey-app.firebaseapp.com',
@@ -41,6 +44,15 @@ const firebase = {
       browser,
       surveyValue,
     }),
+  startFirebaseUI: domSelector => {
+    // TODO: FirebaseUI
+    // const ui = new firebaseui.auth.AuthUI(auth)
+    // ui.start(domSelector, {
+    //   signInSuccessUrl: '/dashboard',
+    //   signInOptions: [app.auth.GoogleAuthProvider.PROVIDER_ID],
+    //   tosUrl: '/',
+    // })
+  },
 }
 
 export default firebase
