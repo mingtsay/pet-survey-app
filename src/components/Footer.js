@@ -16,15 +16,15 @@ const Footer = () => {
           <Typography>&copy; 2022 Love Collar 企劃團隊</Typography>
           <Box>
             <Link
-              href="/terms"
-              onClick={handleLinkEvent('/terms')}
+              href="/#/terms"
+              onClick={handleLinkEvent('terms')}
             >
               使用條款
             </Link>
             {' | '}
             <Link
-              href="/privacy"
-              onClick={handleLinkEvent('/privacy')}
+              href="/#/privacy"
+              onClick={handleLinkEvent('privacy')}
             >
               隱私權政策
             </Link>

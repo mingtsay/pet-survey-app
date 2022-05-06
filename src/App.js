@@ -1,5 +1,5 @@
 // import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 
 import {
   DashboardScreen,
@@ -11,7 +11,7 @@ import {
 
 const App = () => (
   <>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route
           path="/"
@@ -34,7 +34,7 @@ const App = () => (
           element={<PrivacyScreen />}
         />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </>
 )
 
