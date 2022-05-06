@@ -376,17 +376,34 @@ const cards = [
   },
 ]
 
+const loadSurveyValue = () => {
+  try {
+    return JSON.parse(store.get('surveyValue') || '{}')
+  } catch (error) {
+    return {}
+  }
+}
+
+const saveSurveyValue = value => {
+  try {
+    const valueJson = JSON.stringify(value)
+    store.set('surveyValue', valueJson)
+  } catch (error) {
+    // do nothing
+  }
+}
+
 const App = () => {
   const trigger = useScrollTrigger()
 
   const [surveyValue, setSurveyValue] = useState(JSON.parse(store.get('surveyValue')))
 
   useEffect(() => {
-    setSurveyValue(JSON.parse(store.get('surveyValue') || '{}'))
+    setSurveyValue(loadSurveyValue())
   }, [])
 
   useEffect(() => {
-    store.set('surveyValue', JSON.stringify(surveyValue))
+    saveSurveyValue(surveyValue)
   }, [surveyValue])
 
   return (
