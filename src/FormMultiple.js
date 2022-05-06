@@ -7,7 +7,7 @@ import {
 } from '@mui/material'
 import FormRequired from './FormRequired'
 
-const FormMultiple = ({ card, surveyValue, setSurveyValue }) => (
+const FormMultiple = ({ card, value, setValue }) => (
   <FormGroup>
     {card.label && (
       <FormLabel>
@@ -20,25 +20,19 @@ const FormMultiple = ({ card, surveyValue, setSurveyValue }) => (
         key={option.value}
         control={
           <Checkbox
-            checked={
-              surveyValue[card.name]?.selected?.includes?.(option.value) ??
-              false
-            }
-            onChange={event => {
-              setSurveyValue(oldSurveyValue => ({
-                ...oldSurveyValue,
-                [card.name]: {
-                  ...oldSurveyValue[card.name],
-                  selected: (
-                    oldSurveyValue[card.name]?.selected?.filter?.(
-                      value => value !== option.value
-                    ) ?? []
-                  )
-                    .concat(event.target.checked ? [option.value] : [])
-                    .sort(),
-                },
+            checked={value?.selected?.includes?.(option.value) ?? false}
+            onChange={event =>
+              setValue(oldValue => ({
+                ...oldValue,
+                selected: (
+                  oldValue?.selected?.filter?.(
+                    value => value !== option.value
+                  ) ?? []
+                )
+                  .concat(event.target.checked ? [option.value] : [])
+                  .sort(),
               }))
-            }}
+            }
           />
         }
         label={option.label}
@@ -49,16 +43,13 @@ const FormMultiple = ({ card, surveyValue, setSurveyValue }) => (
         <FormControlLabel
           control={
             <Checkbox
-              checked={surveyValue[card.name]?.other !== undefined}
+              checked={value?.other !== undefined}
               onChange={event =>
-                setSurveyValue(oldSurveyValue => ({
-                  ...oldSurveyValue,
-                  [card.name]: {
-                    ...oldSurveyValue[card.name],
-                    other: event.target.checked
-                      ? oldSurveyValue[card.name]?.other ?? ''
-                      : undefined,
-                  },
+                setValue(oldValue => ({
+                  ...oldValue,
+                  other: event.target.checked
+                    ? oldValue?.other ?? ''
+                    : undefined,
                 }))
               }
             />
@@ -66,15 +57,13 @@ const FormMultiple = ({ card, surveyValue, setSurveyValue }) => (
           label="其他"
         />
         <TextField
-          required={surveyValue[card.name]?.other !== undefined}
-          value={surveyValue[card.name]?.other ?? ''}
+          error={value?.other === ''}
+          required={value?.other !== undefined}
+          value={value?.other ?? ''}
           onChange={event =>
-            setSurveyValue(oldSurveyValue => ({
-              ...oldSurveyValue,
-              [card.name]: {
-                ...oldSurveyValue[card.name],
-                other: event.target.value,
-              },
+            setValue(oldValue => ({
+              ...oldValue,
+              other: event.target.value,
             }))
           }
         />

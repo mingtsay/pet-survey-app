@@ -60,50 +60,62 @@ const App = () => {
       <Container>
         {cards
           .filter(card => card?.visibility?.(surveyValue) ?? true)
-          .map((card, index) => (
-            <Card
-              key={`card-${index}`}
-              variant="outlined"
-              sx={{ mx: 2, my: 4, px: 2, py: 4 }}
-            >
-              {card.text && (
-                <Typography
-                  variant="body1"
-                  component="div"
-                >
-                  {card.text}
-                </Typography>
-              )}
-              {card.type === 'input' && (
-                <FormInput
-                  card={card}
-                  surveyValue={surveyValue}
-                  setSurveyValue={setSurveyValue}
-                />
-              )}
-              {card.type === 'single' && (
-                <FormSingle
-                  card={card}
-                  surveyValue={surveyValue}
-                  setSurveyValue={setSurveyValue}
-                />
-              )}
-              {card.type === 'multiple' && (
-                <FormMultiple
-                  card={card}
-                  surveyValue={surveyValue}
-                  setSurveyValue={setSurveyValue}
-                />
-              )}
-              {card.type === 'submit' && (
-                <FormSubmit
-                  card={card}
-                  surveyValue={surveyValue}
-                  submitHandler={submitHandler}
-                />
-              )}
-            </Card>
-          ))}
+          .map((card, index) => {
+            const { name, validator } = card
+            const value = surveyValue[name]
+            const setValue = newValue =>
+              setSurveyValue(oldSurveyValue => ({
+                ...oldSurveyValue,
+                [name]:
+                  typeof newValue === 'function' ? newValue(value) : newValue,
+              }))
+
+            return (
+              <Card
+                key={`card-${index}`}
+                variant="outlined"
+                sx={{ mx: 2, my: 4, px: 2, py: 4 }}
+              >
+                {card.text && (
+                  <Typography
+                    variant="body1"
+                    component="div"
+                  >
+                    {card.text}
+                  </Typography>
+                )}
+                {card.type === 'input' && (
+                  <FormInput
+                    card={card}
+                    value={value}
+                    setValue={setValue}
+                    validated={validator?.(value) ?? true}
+                  />
+                )}
+                {card.type === 'single' && (
+                  <FormSingle
+                    card={card}
+                    value={value}
+                    setValue={setValue}
+                  />
+                )}
+                {card.type === 'multiple' && (
+                  <FormMultiple
+                    card={card}
+                    value={value}
+                    setValue={setValue}
+                  />
+                )}
+                {card.type === 'submit' && (
+                  <FormSubmit
+                    card={card}
+                    validated={validator?.(surveyValue) ?? true}
+                    submitHandler={submitHandler}
+                  />
+                )}
+              </Card>
+            )
+          })}
         <SubmitDialog
           open={openSubmitDialog}
           onClose={() => setOpenSubmitDialog(false)}

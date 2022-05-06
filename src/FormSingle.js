@@ -7,7 +7,7 @@ import {
 } from '@mui/material'
 import FormRequired from './FormRequired'
 
-const FormSingle = ({ card, surveyValue, setSurveyValue }) => (
+const FormSingle = ({ card, value, setValue }) => (
   <FormControl>
     {card.label && (
       <FormLabel>
@@ -17,13 +17,8 @@ const FormSingle = ({ card, surveyValue, setSurveyValue }) => (
     )}
     <RadioGroup
       row={!!card.props?.row}
-      value={surveyValue[card.name] ?? ''}
-      onChange={event =>
-        setSurveyValue(oldSurveyValue => ({
-          ...oldSurveyValue,
-          [card.name]: event.target.value,
-        }))
-      }
+      value={value}
+      onChange={event => setValue(event.target.value)}
     >
       {card.options.map(option => (
         <FormControlLabel

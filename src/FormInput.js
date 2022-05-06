@@ -1,7 +1,7 @@
 import { InputAdornment, TextField, Typography } from '@mui/material'
 import FormRequired from './FormRequired'
 
-const FormInput = ({ card, surveyValue, setSurveyValue }) => (
+const FormInput = ({ card, value, setValue, validated }) => (
   <>
     {card.label && (
       <Typography
@@ -20,14 +20,9 @@ const FormInput = ({ card, surveyValue, setSurveyValue }) => (
           <InputAdornment position="end">{card.unit}</InputAdornment>
         ),
       }}
-      error={!(card.validator?.(surveyValue[card.name]) ?? true)}
-      value={surveyValue[card.name] ?? ''}
-      onChange={event =>
-        setSurveyValue(oldSurveyValue => ({
-          ...oldSurveyValue,
-          [card.name]: event.target.value,
-        }))
-      }
+      error={!validated}
+      value={value}
+      onChange={event => setValue(event.target.value)}
     />
   </>
 )
