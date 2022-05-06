@@ -26,6 +26,7 @@ import {
   SubmitDialog,
   SubmitFailureDialog,
 } from '../components'
+import Footer from '../components/Footer'
 
 const loadSurveyValue = () => JSON.parse(store.get('surveyValue') || '{}') ?? {}
 const saveSurveyValue = value => store.set('surveyValue', JSON.stringify(value))
@@ -154,6 +155,7 @@ const SurveyScreen = () => {
           onClose={() => setOpenSubmitFailureDialog(false)}
         />
       </Container>
+      <Footer />
     </>
   )
 }

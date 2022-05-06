@@ -23,6 +23,7 @@ import {
 
 import AuthService, { useUser } from '../services/AuthService'
 import SurveyService from '../services/SurveyService'
+import Footer from '../components/Footer'
 
 const DashboardScreen = () => {
   const navigate = useNavigate()
@@ -104,6 +105,7 @@ const DashboardScreen = () => {
             </Accordion>
           ))}
       </Container>
+      <Footer />
     </>
   )
 }

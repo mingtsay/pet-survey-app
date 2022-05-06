@@ -1,7 +1,13 @@
 // import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import { DashboardScreen, LoginScreen, SurveyScreen } from './screens'
+import {
+  DashboardScreen,
+  LoginScreen,
+  PrivacyScreen,
+  SurveyScreen,
+  TermsScreen,
+} from './screens'
 
 const App = () => (
   <>
@@ -18,6 +24,14 @@ const App = () => (
         <Route
           path="dashboard"
           element={<DashboardScreen />}
+        />
+        <Route
+          path="terms"
+          element={<TermsScreen />}
+        />
+        <Route
+          path="privacy"
+          element={<PrivacyScreen />}
         />
       </Routes>
     </BrowserRouter>

@@ -24,6 +24,7 @@ import {
 } from '@mui/icons-material'
 
 import AuthService, { useUser } from '../services/AuthService'
+import Footer from '../components/Footer'
 
 const LoginScreen = () => {
   const navigate = useNavigate()
@@ -142,6 +143,7 @@ const LoginScreen = () => {
           登入系統
         </Button>
       </Container>
+      <Footer />
     </>
   )
 }
