@@ -22,6 +22,8 @@ import {
 import SendIcon from '@mui/icons-material/Send'
 import store from 'store2'
 
+import SubmitDialog from './SubmitDialog'
+
 const cards = [
   {
     name: 'description',
@@ -383,9 +385,16 @@ const App = () => {
   const trigger = useScrollTrigger()
 
   const [surveyValue, setSurveyValue] = useState(loadSurveyValue())
+  const [openSubmitDialog, setOpenSubmitDialog] = useState(false)
 
-  useEffect(() => { setSurveyValue(loadSurveyValue()) }, [])
-  useEffect(() => { saveSurveyValue(surveyValue) }, [surveyValue])
+  useEffect(() => {
+    setSurveyValue(loadSurveyValue())
+  }, [])
+  useEffect(() => {
+    saveSurveyValue(surveyValue)
+  }, [surveyValue])
+
+  const submitHandler = () => setOpenSubmitDialog(true)
 
   return (
     <React.Fragment>
@@ -599,6 +608,7 @@ const App = () => {
                     variant="contained"
                     endIcon={<SendIcon />}
                     sx={{ marginTop: 2 }}
+                    onClick={submitHandler}
                   >
                     送出問卷
                   </Button>
@@ -606,6 +616,13 @@ const App = () => {
               )}
             </Card>
           ))}
+        <SubmitDialog
+          open={openSubmitDialog}
+          onClose={() => setOpenSubmitDialog(false)}
+        />
+        <Card>
+          <pre>{JSON.stringify(surveyValue, null, 2)}</pre>
+        </Card>
       </Container>
     </React.Fragment>
   )
