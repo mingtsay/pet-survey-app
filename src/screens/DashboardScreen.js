@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Alert,
   AppBar,
   Button,
@@ -14,17 +17,27 @@ import {
 } from '@mui/material'
 import {
   Assignment as AssignmentIcon,
+  ExpandMore as ExpandMoreIcon,
   Logout as LogoutIcon,
 } from '@mui/icons-material'
 
 import AuthService, { useUser } from '../services/AuthService'
+import SurveyService from '../services/SurveyService'
 
 const DashboardScreen = () => {
   const navigate = useNavigate()
   const user = useUser()
 
+  const [list, setList] = useState([])
+
   useEffect(() => {
-    if (!user) navigate('/login')
+    if (!user) {
+      navigate('/login')
+      return
+    }
+
+    SurveyService.list().then(list => setList(list ?? []))
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
@@ -77,6 +90,19 @@ const DashboardScreen = () => {
         >
           您正在以 <strong>{user?.email}</strong> 的身份登入。
         </Alert>
+        {list &&
+          list?.map?.(({ id, data }) => (
+            <Accordion key={id}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>{id}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography component="pre">
+                  {JSON.stringify(data, null, 2)}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
       </Container>
     </>
   )
