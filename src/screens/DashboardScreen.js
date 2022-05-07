@@ -24,6 +24,7 @@ import {
 import {
   Assignment as AssignmentIcon,
   Logout as LogoutIcon,
+  ShowChart as ShowChartIcon,
 } from '@mui/icons-material'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -156,6 +157,20 @@ const DashboardScreen = () => {
                   已收集到的問卷數量
                 </Typography>
               </Box>
+              <List
+                dense
+                disablePadding
+              >
+                <ListItemButton
+                  selected={selectedSurveyId === null}
+                  onClick={() => setSelectedSurveyId(null)}
+                >
+                  <ListItemIcon>
+                    <ShowChartIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="問卷填答概況統計" />
+                </ListItemButton>
+              </List>
               <Divider />
               <Typography
                 variant="subtitle1"
