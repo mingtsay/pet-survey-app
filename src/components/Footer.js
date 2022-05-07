@@ -17,14 +17,14 @@ const Footer = () => {
           <Box>
             <Link
               href="/#/terms"
-              onClick={handleLinkEvent('terms')}
+              onClick={handleLinkEvent('/terms')}
             >
               使用條款
             </Link>
             {' | '}
             <Link
               href="/#/privacy"
-              onClick={handleLinkEvent('privacy')}
+              onClick={handleLinkEvent('/privacy')}
             >
               隱私權政策
             </Link>
