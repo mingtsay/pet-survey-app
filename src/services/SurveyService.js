@@ -5,10 +5,12 @@ import {
   collection,
   getDocs,
   getFirestore,
+  onSnapshot,
   serverTimestamp,
 } from 'firebase/firestore'
 
 import firebaseApp from '../firebaseApp'
+import { useEffect, useState } from 'react'
 
 const db = getFirestore(firebaseApp)
 
@@ -27,6 +29,22 @@ new Promise(async resolve => {
   ip.v6 = await publicIp.v6()
   resolve()
 })
+
+export const useSurveyService = () => {
+  const [list, setList] = useState({})
+
+  useEffect(() => {
+    const unSubscribeSnapshot = onSnapshot(
+      collection(db, collectionName),
+      snapshot =>
+        snapshot.forEach(doc => setList(l => ({ ...l, [doc.id]: doc.data() })))
+    )
+
+    return () => unSubscribeSnapshot()
+  }, [])
+
+  return list
+}
 
 const SurveyService = {
   submit: async surveyValue =>
