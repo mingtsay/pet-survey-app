@@ -42,6 +42,10 @@ const SurveyService = {
     snapshot.forEach(doc => list.push({ id: doc.id, data: doc.data() }))
     return list
   },
+  count: async () => {
+    const snapshot = await getDocs(collection(db, collectionName))
+    return snapshot.size
+  },
   get: async id => ({}),
 }
 

@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Alert,
   AppBar,
+  Box,
   Button,
+  Card,
   Container,
   CssBaseline,
   IconButton,
@@ -17,7 +16,6 @@ import {
 } from '@mui/material'
 import {
   Assignment as AssignmentIcon,
-  ExpandMore as ExpandMoreIcon,
   Logout as LogoutIcon,
 } from '@mui/icons-material'
 
@@ -29,7 +27,7 @@ const DashboardScreen = () => {
   const navigate = useNavigate()
   const user = useUser()
 
-  const [list, setList] = useState([])
+  const [surveyCount, setSurveyCount] = useState(0)
 
   useEffect(() => {
     if (!user) {
@@ -37,7 +35,7 @@ const DashboardScreen = () => {
       return
     }
 
-    SurveyService.list().then(list => setList(list ?? []))
+    SurveyService.count().then(setSurveyCount)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
@@ -91,19 +89,41 @@ const DashboardScreen = () => {
         >
           您正在以 <strong>{user?.email}</strong> 的身份登入。
         </Alert>
-        {list &&
-          list?.map?.(({ id, data }) => (
-            <Accordion key={id}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>{id}</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography component="pre">
-                  {JSON.stringify(data, null, 2)}
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-          ))}
+        <Card sx={{ mx: 'auto', my: 4, p: 4, width: 250 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+            }}
+          >
+            <AssignmentIcon sx={{ fontSize: 64 }} />
+            <Typography sx={{ fontSize: 64 }}>{surveyCount}</Typography>
+          </Box>
+          <Typography sx={{ textAlign: 'center' }}>
+            已收集到的問卷數量
+          </Typography>
+        </Card>
+        <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
+          <Button
+            variant="contained"
+            disabled
+          >
+            查看問卷內容（工事中）
+          </Button>
+          <Button
+            variant="contained"
+            disabled
+          >
+            查看統計資料（工事中）
+          </Button>
+          <Button
+            variant="contained"
+            disabled
+          >
+            匯出問卷資料（工事中）
+          </Button>
+        </Box>
       </Container>
       <Footer />
     </>

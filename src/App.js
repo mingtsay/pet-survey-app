@@ -2,7 +2,9 @@
 import { HashRouter, Route, Routes } from 'react-router-dom'
 
 import {
+  DashboardListScreen,
   DashboardScreen,
+  DashboardSurveyScreen,
   LoginScreen,
   PrivacyScreen,
   SurveyScreen,
@@ -24,6 +26,14 @@ const App = () => (
         <Route
           path="dashboard"
           element={<DashboardScreen />}
+        />
+        <Route
+          path="dashboard/list"
+          element={<DashboardListScreen />}
+        />
+        <Route
+          path="dashboard/survey/:id"
+          element={<DashboardSurveyScreen />}
         />
         <Route
           path="terms"
