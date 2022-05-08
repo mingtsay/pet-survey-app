@@ -15,7 +15,7 @@ import {
   Dashboard as DashboardIcon,
 } from '@mui/icons-material'
 
-import Footer from '../components/Footer'
+import { Footer } from '../components'
 
 const PrivacyScreen = () => {
   const trigger = useScrollTrigger()

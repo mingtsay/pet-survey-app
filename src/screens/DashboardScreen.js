@@ -15,7 +15,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  ListSubheader,
   Paper,
   Toolbar,
   Tooltip,
@@ -27,25 +26,9 @@ import {
   ShowChart as ShowChartIcon,
 } from '@mui/icons-material'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAndroid, faApple } from '@fortawesome/free-brands-svg-icons'
-import {
-  faBan,
-  faCat,
-  faDesktop,
-  faDog,
-  faGenderless,
-  faMars,
-  faMobile,
-  faQuestion,
-  faStore,
-  faStoreSlash,
-  faVenus,
-} from '@fortawesome/free-solid-svg-icons'
-
 import AuthService, { useUser } from '../services/AuthService'
 import { useSurveyService } from '../services/SurveyService'
-import Footer from '../components/Footer'
+import { DashboardSurveyList, Footer } from '../components'
 
 const DashboardScreen = () => {
   const navigate = useNavigate()
@@ -178,118 +161,11 @@ const DashboardScreen = () => {
               >
                 問卷列表
               </Typography>
-              <List
-                sx={{ height: '40vh', overflowY: 'scroll' }}
-                dense
-                subheader={<li />}
-                disablePadding
-              >
-                {Object.keys(surveyList).map(date => (
-                  <li key={date}>
-                    <ul>
-                      <ListSubheader>{date}</ListSubheader>
-                      {surveyList[date].map(({ id, data, time }) => {
-                        const {
-                          browser: { os },
-                          surveyValue: {
-                            gender,
-                            'owning-pets': owningPets,
-                            'owned-pets-type': ownedPetsType,
-                            'willing-buying': willingBuying,
-                            'willing-owning-pets': willingOwningPets,
-                          },
-                        } = data
-
-                        const genderIcon =
-                          (gender === 'male' && faMars) ||
-                          (gender === 'female' && faVenus) ||
-                          faGenderless
-                        const osIcon =
-                          (os === 'iOS' && faApple) ||
-                          (os === 'Android OS' && faAndroid) ||
-                          ([
-                            'BlackBerry OS',
-                            'Windows Mobile',
-                            'Amazon OS',
-                          ].includes(os) &&
-                            faMobile) ||
-                          ([
-                            'Windows 3.11',
-                            'Windows 95',
-                            'Windows 98',
-                            'Windows 2000',
-                            'Windows XP',
-                            'Windows Server 2003',
-                            'Windows Vista',
-                            'Windows 7',
-                            'Windows 8',
-                            'Windows 8.1',
-                            'Windows 10',
-                            'Windows ME',
-                            'Windows CE',
-                            'Open BSD',
-                            'Sun OS',
-                            'Linux',
-                            'Mac OS',
-                            'QNX',
-                            'BeOS',
-                            'OS/2',
-                            'Chrome OS',
-                          ].includes(os) &&
-                            faDesktop) ||
-                          faQuestion
-
-                        const petIcon =
-                          (owningPets === 'yes' &&
-                            ((ownedPetsType === 'cat' && faCat) ||
-                              (ownedPetsType === 'dog' && faDog))) ||
-                          faBan
-
-                        const buyingIcon =
-                          (((owningPets === 'yes' && willingBuying === 'yes') ||
-                            (owningPets === 'no' &&
-                              willingOwningPets === 'yes')) &&
-                            faStore) ||
-                          faStoreSlash
-
-                        return (
-                          <ListItemButton
-                            key={id}
-                            selected={id === selectedSurveyId}
-                            onClick={() => setSelectedSurveyId(id)}
-                          >
-                            <ListItemIcon sx={{ mr: 1 }}>
-                              <FontAwesomeIcon
-                                fixedWidth
-                                icon={genderIcon}
-                              />
-                              <FontAwesomeIcon
-                                fixedWidth
-                                icon={osIcon}
-                              />
-                              <FontAwesomeIcon
-                                fixedWidth
-                                icon={petIcon}
-                              />
-                              <FontAwesomeIcon
-                                fixedWidth
-                                icon={buyingIcon}
-                              />
-                            </ListItemIcon>
-                            <ListItemText
-                              primary={
-                                <Typography sx={{ fontFamily: 'monospace' }}>
-                                  {time}
-                                </Typography>
-                              }
-                            />
-                          </ListItemButton>
-                        )
-                      })}
-                    </ul>
-                  </li>
-                ))}
-              </List>
+              <DashboardSurveyList
+                surveyList={surveyList}
+                selectedSurveyId={selectedSurveyId}
+                onSurveySelect={setSelectedSurveyId}
+              />
             </Paper>
           </Grid>
           <Grid
@@ -297,9 +173,11 @@ const DashboardScreen = () => {
             xs={12}
             md={9}
           >
-            <pre>
-              {selectedSurvey && JSON.stringify(selectedSurvey, null, 2)}
-            </pre>
+            {selectedSurveyId && (
+              <pre>
+                {selectedSurvey && JSON.stringify(selectedSurvey, null, 2)}
+              </pre>
+            )}
           </Grid>
         </Grid>
       </Container>

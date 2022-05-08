@@ -24,7 +24,7 @@ import {
 } from '@mui/icons-material'
 
 import AuthService, { useUser } from '../services/AuthService'
-import Footer from '../components/Footer'
+import { Footer } from '../components'
 
 const LoginScreen = () => {
   const navigate = useNavigate()

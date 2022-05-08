@@ -15,7 +15,7 @@ import {
   Dashboard as DashboardIcon,
 } from '@mui/icons-material'
 
-import Footer from '../components/Footer'
+import { Footer } from '../components'
 
 const TermsScreen = () => {
   const trigger = useScrollTrigger()

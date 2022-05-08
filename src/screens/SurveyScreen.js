@@ -26,7 +26,7 @@ import {
   SubmitDialog,
   SubmitFailureDialog,
 } from '../components'
-import Footer from '../components/Footer'
+import { Footer } from '../components'
 
 const loadSurveyValue = () => JSON.parse(store.get('surveyValue') || '{}') ?? {}
 const saveSurveyValue = value => store.set('surveyValue', JSON.stringify(value))

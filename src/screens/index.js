@@ -1,6 +1,4 @@
-export { default as DashboardListScreen } from './DashboardListScreen'
 export { default as DashboardScreen } from './DashboardScreen'
-export { default as DashboardSurveyScreen } from './DashboardSurveyScreen'
 export { default as LoginScreen } from './LoginScreen'
 export { default as PrivacyScreen } from './PrivacyScreen'
 export { default as SurveyScreen } from './SurveyScreen'
