@@ -1,4 +1,7 @@
+export { default as DashboardStatistics } from './DashboardStatistics'
+export { default as DashboardSurveyDetail } from './DashboardSurveyDetail'
 export { default as DashboardSurveyList } from './DashboardSurveyList'
+export { default as DashboardSurveyMeta } from './DashboardSurveyMeta'
 export { default as Footer } from './Footer'
 export { default as FormInput } from './FormInput'
 export { default as FormMultiple } from './FormMultiple'

@@ -28,7 +28,13 @@ import {
 
 import AuthService, { useUser } from '../services/AuthService'
 import { useSurveyService } from '../services/SurveyService'
-import { DashboardSurveyList, Footer } from '../components'
+import {
+  DashboardStatistics,
+  DashboardSurveyDetail,
+  DashboardSurveyList,
+  DashboardSurveyMeta,
+  Footer,
+} from '../components'
 
 const DashboardScreen = () => {
   const navigate = useNavigate()
@@ -173,10 +179,20 @@ const DashboardScreen = () => {
             xs={12}
             md={9}
           >
-            {selectedSurveyId && (
-              <pre>
-                {selectedSurvey && JSON.stringify(selectedSurvey, null, 2)}
-              </pre>
+            {(!selectedSurveyId && (
+              <DashboardStatistics surveySet={surveySet} />
+            )) || (
+              <Paper>
+                <DashboardSurveyMeta
+                  ip={selectedSurvey.ip}
+                  browser={selectedSurvey.browser}
+                  timestamp={selectedSurvey.timestamp}
+                />
+                <Divider />
+                <DashboardSurveyDetail
+                  surveyValue={selectedSurvey.surveyValue}
+                />
+              </Paper>
             )}
           </Grid>
         </Grid>
