@@ -16,7 +16,7 @@ const DashboardSurveyMeta = ({ ip, browser, timestamp }) => (
         '& div.MuiPaper-root': {
           display: 'flex',
           alignItems: 'center',
-          // width: 'fit-content',
+          m: 1,
           px: 2,
           py: 1,
           '& hr.MuiDivider-root': {
