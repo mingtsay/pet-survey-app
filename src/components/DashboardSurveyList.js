@@ -125,7 +125,7 @@ const DashboardSurveyList = ({
 }) => (
   <List
     sx={{
-      height: { xs: '60vh', md: '40vh' },
+      height: { xs: '60vh', md: 'calc(100vh - 605px)' },
       overflowY: 'scroll',
     }}
     dense

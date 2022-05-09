@@ -9,7 +9,7 @@ const DashboardSurveyDetail = ({ surveyValue }) => (
   <Box
     sx={{
       overflowY: { xs: 'inherit', md: 'scroll' },
-      height: { xs: 'auto', md: 'calc(40vh + 81px)' },
+      height: { xs: 'auto', md: 'calc(100vh - 532px)' },
       p: 1,
     }}
   >
