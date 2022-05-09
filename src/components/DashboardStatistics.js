@@ -38,7 +38,14 @@ const DashboardStatistics = ({ surveySet }) => {
   console.log(surveySet, statistics, cards)
 
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        height: { xs: 'inherit', md: 'calc(100vh - 347px)' },
+        overflowY: { xs: 'inherit', md: 'scroll' },
+      }}
+    >
       {cards
         .filter(
           ({ type, name }) =>
