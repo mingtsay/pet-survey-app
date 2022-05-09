@@ -180,21 +180,23 @@ const DashboardScreen = () => {
             xs={12}
             md={9}
           >
-            {(!selectedSurveyId && (
-              <DashboardStatistics surveySet={surveySet} />
-            )) || (
-              <Paper>
-                <DashboardSurveyMeta
-                  ip={selectedSurvey.ip}
-                  browser={selectedSurvey.browser}
-                  timestamp={selectedSurvey.timestamp}
-                />
-                <Divider />
-                <DashboardSurveyDetail
-                  surveyValue={selectedSurvey.surveyValue}
-                />
-              </Paper>
-            )}
+            <Paper>
+              {(!selectedSurveyId && (
+                <DashboardStatistics surveySet={surveySet} />
+              )) || (
+                <>
+                  <DashboardSurveyMeta
+                    ip={selectedSurvey.ip}
+                    browser={selectedSurvey.browser}
+                    timestamp={selectedSurvey.timestamp}
+                  />
+                  <Divider />
+                  <DashboardSurveyDetail
+                    surveyValue={selectedSurvey.surveyValue}
+                  />
+                </>
+              )}
+            </Paper>
           </Grid>
         </Grid>
       </Container>
