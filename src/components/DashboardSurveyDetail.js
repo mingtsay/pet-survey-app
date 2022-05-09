@@ -1,12 +1,18 @@
 import React from 'react'
 
-import { Card } from '@mui/material'
+import { Box, Card } from '@mui/material'
 
 import cards from '../cards'
 import { FormInput, FormMultiple, FormSingle } from '.'
 
 const DashboardSurveyDetail = ({ surveyValue }) => (
-  <>
+  <Box
+    sx={{
+      overflowY: { xs: 'inherit', md: 'scroll' },
+      height: { xs: 'auto', md: 'calc(40vh + 81px)' },
+      p: 1,
+    }}
+  >
     {cards
       .filter(card => ['input', 'multiple', 'single'].indexOf(card.type) !== -1)
       .filter(card => card?.visibility?.(surveyValue) ?? true)
@@ -18,7 +24,15 @@ const DashboardSurveyDetail = ({ surveyValue }) => (
           <Card
             key={`card-${index}`}
             variant="outlined"
-            sx={{ mx: 2, my: 4, px: 2, py: 4 }}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              px: 2,
+              py: 1,
+              '& hr.MuiDivider-root': {
+                mx: 2,
+              },
+            }}
           >
             {card.type === 'input' && (
               <FormInput
@@ -45,8 +59,7 @@ const DashboardSurveyDetail = ({ surveyValue }) => (
           </Card>
         )
       })}
-    <pre>{JSON.stringify(surveyValue, null, 2)}</pre>
-  </>
+  </Box>
 )
 
 export default DashboardSurveyDetail

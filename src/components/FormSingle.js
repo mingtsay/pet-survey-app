@@ -1,4 +1,5 @@
 import {
+  Divider,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -16,7 +17,11 @@ const FormSingle = ({
 }) =>
   dashboard ? (
     <>
-      <Typography>{card.label}</Typography>
+      <Typography variant="caption">{card.label}</Typography>
+      <Divider
+        orientation="vertical"
+        flexItem
+      />
       <Typography>
         {card.options.find(({ value: v }) => value === v).label}
       </Typography>

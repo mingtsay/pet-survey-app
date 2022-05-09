@@ -146,6 +146,7 @@ const DashboardScreen = () => {
                   已收集到的問卷數量
                 </Typography>
               </Box>
+              <Divider />
               <List
                 dense
                 disablePadding
