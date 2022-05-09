@@ -124,7 +124,10 @@ const DashboardSurveyList = ({
   onSurveySelect,
 }) => (
   <List
-    sx={{ height: '40vh', overflowY: 'scroll' }}
+    sx={{
+      height: { xs: '60vh', md: '40vh' },
+      overflowY: 'scroll',
+    }}
     dense
     subheader={<li />}
     disablePadding

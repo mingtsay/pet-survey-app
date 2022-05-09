@@ -6,6 +6,7 @@ import {
   AppBar,
   Box,
   Button,
+  Collapse,
   Container,
   CssBaseline,
   Divider,
@@ -22,6 +23,8 @@ import {
 } from '@mui/material'
 import {
   Assignment as AssignmentIcon,
+  ExpandLess as ExpandLessIcon,
+  ExpandMore as ExpandMoreIcon,
   Logout as LogoutIcon,
   ShowChart as ShowChartIcon,
 } from '@mui/icons-material'
@@ -43,6 +46,7 @@ const DashboardScreen = () => {
   const surveySet = useSurveyService()
   const surveyCount = Object.keys(surveySet).length
 
+  const [openSurveyList, setOpenSurveyList] = useState(true)
   const [selectedSurveyId, setSelectedSurveyId] = useState(null)
   const selectedSurvey = surveySet[selectedSurveyId] ?? {}
 
@@ -160,19 +164,22 @@ const DashboardScreen = () => {
                   </ListItemIcon>
                   <ListItemText primary="問卷填答概況統計" />
                 </ListItemButton>
+                <Divider />
+                <ListItemButton onClick={() => setOpenSurveyList(v => !v)}>
+                  <ListItemText primary="問卷列表" />
+                  {openSurveyList ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                </ListItemButton>
+                <Collapse
+                  in={openSurveyList}
+                  timeout="auto"
+                >
+                  <DashboardSurveyList
+                    surveyList={surveyList}
+                    selectedSurveyId={selectedSurveyId}
+                    onSurveySelect={setSelectedSurveyId}
+                  />
+                </Collapse>
               </List>
-              <Divider />
-              <Typography
-                variant="subtitle1"
-                sx={{ mx: 2, mt: 2 }}
-              >
-                問卷列表
-              </Typography>
-              <DashboardSurveyList
-                surveyList={surveyList}
-                selectedSurveyId={selectedSurveyId}
-                onSurveySelect={setSelectedSurveyId}
-              />
             </Paper>
           </Grid>
           <Grid
