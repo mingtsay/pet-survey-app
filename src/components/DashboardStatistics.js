@@ -14,13 +14,16 @@ const DashboardStatistics = ({ surveySet }) => {
   if (surveySet)
     Object.values(surveySet).forEach(({ surveyValue }) => {
       Object.entries(surveyValue).forEach(([key, value]) => {
+        // skip not valid options
+        const card = cards.find(({ name }) => name === key)
+        if (!(card.visibility?.(surveyValue) ?? true)) return
+
         if (!statistics[key]) statistics[key] = {}
         if (value.selected || value.other) {
           ;[...(value.selected || []), value.other]
             .filter(v => v)
             .forEach(value => {
               if (!statistics[key][value]) statistics[key][value] = 0
-
               ++statistics[key][value]
             })
           return
