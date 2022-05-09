@@ -7,7 +7,7 @@ import {
 } from '@mui/material'
 import FormRequired from './FormRequired'
 
-const FormMultiple = ({ card, value, setValue }) => (
+const FormMultiple = ({ card, value, setValue = () => undefined }) => (
   <FormGroup>
     {card.label && (
       <FormLabel>

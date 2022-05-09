@@ -1,7 +1,7 @@
 import { InputAdornment, TextField, Typography } from '@mui/material'
 import FormRequired from './FormRequired'
 
-const FormInput = ({ card, value, setValue, validated }) => (
+const FormInput = ({ card, value, setValue = () => undefined, validated }) => (
   <>
     {card.label && (
       <Typography
