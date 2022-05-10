@@ -30,7 +30,6 @@ const DashboardStatistics = ({ surveySet }) => {
         }
 
         if (!statistics[key][value]) statistics[key][value] = 0
-
         ++statistics[key][value]
       })
     })
@@ -63,7 +62,15 @@ const DashboardStatistics = ({ surveySet }) => {
             >
               <TableHead>
                 <TableRow>
-                  <TableCell colSpan={2}>{card.label}</TableCell>
+                  <TableCell
+                    colSpan={2}
+                    sx={{
+                      bgcolor: 'info.main',
+                      color: 'info.contrastText',
+                    }}
+                  >
+                    {card.label}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>選項</TableCell>
