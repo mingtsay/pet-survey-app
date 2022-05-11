@@ -199,6 +199,7 @@ const DashboardScreen = () => {
                   />
                   <Divider />
                   <DashboardSurveyDetail
+                    id={selectedSurveyId}
                     surveyValue={selectedSurvey.surveyValue}
                   />
                 </>
