@@ -5,7 +5,7 @@ import { Box, Card } from '@mui/material'
 import cards from '../cards'
 import { FormInput, FormMultiple, FormSingle } from '.'
 
-const DashboardSurveyDetail = ({ surveyValue }) => (
+const DashboardSurveyDetail = ({ id, surveyValue }) => (
   <Box
     sx={{
       overflowY: { xs: 'inherit', md: 'scroll' },
@@ -13,6 +13,11 @@ const DashboardSurveyDetail = ({ surveyValue }) => (
       p: 1,
     }}
   >
+    <FormInput
+      dashboard
+      card={{ label: '問卷代碼' }}
+      value={id}
+    />
     {cards
       .filter(card => ['input', 'multiple', 'single'].indexOf(card.type) !== -1)
       .filter(card => card?.visibility?.(surveyValue) ?? true)
