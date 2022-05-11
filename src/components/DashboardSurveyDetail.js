@@ -22,7 +22,7 @@ const DashboardSurveyDetail = ({ id, surveyValue }) => (
       .filter(card => ['input', 'multiple', 'single'].indexOf(card.type) !== -1)
       .filter(card => card?.visibility?.(surveyValue) ?? true)
       .map((card, index) => {
-        const { name, validator } = card
+        const { name } = card
         const value = surveyValue[name]
 
         return (
