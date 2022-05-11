@@ -39,7 +39,6 @@ const DashboardSurveyDetail = ({ surveyValue }) => (
                 dashboard
                 card={card}
                 value={value}
-                validated={validator?.(value) ?? true}
               />
             )}
             {card.type === 'single' && (
