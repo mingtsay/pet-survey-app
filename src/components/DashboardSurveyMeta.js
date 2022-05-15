@@ -66,7 +66,8 @@ const DashboardSurveyMeta = ({ ip, browser, timestamp }) => (
         />
         <Typography>
           <code>
-            {dateTimeFormatter(new Date(timestamp.seconds * 1000)) || '-'}
+            {dateTimeFormatter(new Date(timestamp.seconds * 1000))}.
+            {timestamp.nanoseconds}
           </code>
         </Typography>
       </Card>
