@@ -44,7 +44,9 @@ const DashboardScreen = () => {
   const user = useUser()
 
   const surveySet = useSurveyService()
-  const surveyCount = Object.keys(surveySet).length
+  const surveyCount = Object.values(surveySet).filter(
+    survey => !survey.invalidReason
+  ).length
 
   const [openSurveyList, setOpenSurveyList] = useState(true)
   const [selectedSurveyId, setSelectedSurveyId] = useState(null)
@@ -70,8 +72,11 @@ const DashboardScreen = () => {
   // { [date]: [ survey, ... ] }
   const surveyList = {}
   Object.entries(surveySet)
-    .sort((a, b) => b[1].timestamp.seconds - a[1].timestamp.seconds
-      || b[1].timestamp.nanoseconds - a[1].timestamp.nanoseconds)
+    .sort(
+      (a, b) =>
+        b[1].timestamp.seconds - a[1].timestamp.seconds ||
+        b[1].timestamp.nanoseconds - a[1].timestamp.nanoseconds
+    )
     .forEach(([id, data]) => {
       const { date, time } = dateFormatter(
         new Date(data.timestamp.seconds * 1000)
@@ -148,7 +153,7 @@ const DashboardScreen = () => {
                   <Typography sx={{ fontSize: 64 }}>{surveyCount}</Typography>
                 </Box>
                 <Typography sx={{ textAlign: 'center' }}>
-                  已收集到的問卷數量
+                  有效問卷數量
                 </Typography>
               </Box>
               <Divider />
@@ -202,6 +207,7 @@ const DashboardScreen = () => {
                   <DashboardSurveyDetail
                     id={selectedSurveyId}
                     surveyValue={selectedSurvey.surveyValue}
+                    invalidReason={selectedSurvey.invalidReason}
                   />
                 </>
               )}

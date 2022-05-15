@@ -60,6 +60,7 @@ const DashboardSurveyListItem = ({ data, time, selected, onClick }) => {
       'willing-buying': willingBuying,
       'willing-owning-pets': willingOwningPets,
     },
+    invalidReason,
   } = data
 
   const genderIcon =
@@ -90,6 +91,7 @@ const DashboardSurveyListItem = ({ data, time, selected, onClick }) => {
     <ListItemButton
       selected={selected}
       onClick={onClick}
+      sx={{ bgcolor: invalidReason ? '#ccc' : 'inherit' }}
     >
       <ListItemIcon sx={{ mr: 1 }}>
         <FontAwesomeIcon

@@ -12,7 +12,8 @@ import cards from '../cards'
 const DashboardStatistics = ({ surveySet }) => {
   const statistics = {}
   if (surveySet)
-    Object.values(surveySet).forEach(({ surveyValue }) => {
+    Object.values(surveySet).forEach(({ surveyValue, invalidReason }) => {
+      if (invalidReason) return // skipping invalid surveys
       Object.entries(surveyValue).forEach(([key, value]) => {
         // skip not valid options
         const card = cards.find(({ name }) => name === key)
