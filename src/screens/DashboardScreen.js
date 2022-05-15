@@ -70,7 +70,8 @@ const DashboardScreen = () => {
   // { [date]: [ survey, ... ] }
   const surveyList = {}
   Object.entries(surveySet)
-    .sort((a, b) => b[1].timestamp.seconds - a[1].timestamp.seconds)
+    .sort((a, b) => b[1].timestamp.seconds - a[1].timestamp.seconds
+      || b[1].timestamp.nanoseconds - a[1].timestamp.nanoseconds)
     .forEach(([id, data]) => {
       const { date, time } = dateFormatter(
         new Date(data.timestamp.seconds * 1000)
