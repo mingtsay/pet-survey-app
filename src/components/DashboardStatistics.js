@@ -35,8 +35,6 @@ const DashboardStatistics = ({ surveySet }) => {
       })
     })
 
-  console.log(surveySet, statistics, cards)
-
   return (
     <Box
       sx={{
